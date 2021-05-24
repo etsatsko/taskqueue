@@ -1,7 +1,6 @@
 package com.webshop.simplewebapplication.database.User;
 
 import com.webshop.simplewebapplication.database.HibernateSessionFactoryUtil;
-import com.webshop.simplewebapplication.model.Device;
 import com.webshop.simplewebapplication.model.Usr;
 import org.hibernate.Query;
 import org.hibernate.Session;

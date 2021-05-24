@@ -6,6 +6,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.test.context.support.WithUserDetails;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -16,6 +17,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
+@WithUserDetails("etsatsko")
 public class ShowControllerTest {
 
     @Autowired
@@ -25,16 +27,9 @@ public class ShowControllerTest {
     private MockMvc mockMvc;
 
     @Test
-    public void itemListTest() throws Exception {
-        this.mockMvc.perform(get("/"))
+    public void taskListTest() throws Exception {
+        this.mockMvc.perform(get("/board"))
                 .andDo(print())
-                .andExpect(xpath("//div[@id='item-list']/div").nodeCount(3));
-    }
-
-    @Test
-    public void countDeviceTest() throws Exception {
-        this.mockMvc.perform(get("/Device"))
-                .andDo(print())
-                .andExpect(xpath("//*[@id='total']").string("Итого: 49₽"));
+                .andExpect(xpath("//div[@id='task-list']/div").nodeCount(3));
     }
 }

@@ -3,7 +3,7 @@
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
     <title>Spring Security Example </title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
 </head>
 <body>
 <div th:if="${param.error}">
@@ -17,7 +17,7 @@
     <div><label> Пароль: <input type="password" name="password"/> </label></div>
     <div><input type="submit" value="Войти"/></div>
 </form>
-<a href="/registration">Регистрация</a>
+<a href="/registration" id="reg">Регистрация</a>
 <a href="/index">На главную</a>
 </body>
 </html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Добавление задачи</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
+    <meta name="viewport" content="width=task-width, initial-scale=1"/>
+    <meta charset="UTF-8"/>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<header>
+    <h2 style="margin-left: 10%; font-family: Algerian,serif;">Добавление задачи</h2>
+</header>
+<body>
+<form th:action="@{/logout}" method="post">
+    <input type="submit" value="Sign Out"/>
+</form>
+
+        
+    <div id="prodAdd" >
+        <a href="/"><button>Вернуться к доске</button></a>
+        <span class="descr" id="add-task">Добавить новую задачу</span>
+        <form action="/add" method="post" enctype="multipart/form-data">
+            <input type="text" placeholder="Название" name="name" id="name" th:required="required"/>
+            <input type="text" placeholder="Описание" name="description" id="description" th:required="required"/>
+            <input type="number" placeholder="Приоритет" name="priority" id="priority" th:required="required"/>
+            <button type="submit" id="submit">Добавить</button>
+        </form>
+    </div>
+</body>
+</html>

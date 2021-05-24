@@ -22,12 +22,16 @@ public class UserService implements UserDetailsService {
         UserDetails user = User.builder()
                 .username(usr.getLogin())
                 .password(usr.getPassword())
-                .roles("USER")
+                .roles(usr.getRole())
                 .build();
         return user;
     }
 
     public void addUser(Usr usr) {
         userDAO.addUser(usr);
+    }
+
+    public Usr findByLogin(String userName) {
+        return userDAO.findByLogin(userName);
     }
 }

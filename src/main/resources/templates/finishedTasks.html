@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Выполненные задачи</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
+    <meta name="viewport" content="width=task-width, initial-scale=1"/>
+    <meta charset="UTF-8"/>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<header>
+    <h2>Выполненные задачи</h2>
+</header>
+<body>
+<form th:action="@{/logout}" method="post">
+    <input type="submit" value="Выйти"/>
+</form>
+
+<style>
+    p{
+        margin: 0;
+    }
+    .content{
+        display: flex;
+        align-items: center;
+        flex-direction: row;
+        margin-left: 2%;
+    }
+
+    .task {
+        border: 2px solid black;
+        width: 300px;
+        display: block;
+        align-content: center;
+        margin-top: 30px;
+        background-color: antiquewhite;
+    }
+    .send-to-inprogress-btn {
+        background-color: cornflowerblue;
+    }
+
+    .delete-btn{
+        background-color: red;
+    }
+
+</style>
+
+<a href="/"><button class="back">Вернуться на доску</button></a>
+    <div class="content">
+        <div  th:id="${task.getId()} + task" th:each="task : ${tasks}">
+            <div class="task">
+                <form action="/" method="get">
+                    <p th:text="'id:' + ${task.getId()}" style="display: none;"/>
+                    <p  th:text="'Наименование задачи: ' + ${task.getName()}"></p>
+                    <p  th:text="'Описание задачи: ' + ${task.getDescription()}"></p>
+                    <p  th:text="'Приоритет задачи: ' + ${task.getPriority()}"></p>
+                    <p  th:text="'Статус задачи: ' + ${task.getStatus()}"></p>
+                    <button  class="btn btn-sm delete-btn" th:id="${task.getId()}" th:attr="data-task-id=${task.getId()}">Удалить задачу</button>
+                </form>
+                <button class="btn btn-sm send-to-inprogress-btn" th:id="${task.getId()}" th:attr="data-task-id=${task.getId()}">Переместить в работу</button>
+            </div>
+        </div>
+    </div>
+<script>
+    $(".send-to-inprogress-btn").click((e) => {
+        let btn = $(e.currentTarget);
+        let itemId = btn.attr("data-task-id");
+        $.post("/change/status/inprogress/" + itemId, () => {
+        });
+        document.location.href = "/index";
+    });
+
+    $(".delete-btn").click((e) => {
+        let btn = $(e.currentTarget);
+        let taskId = btn.attr("data-task-id");
+        $.post("/task/" + taskId + "/delete", () => {
+        });
+        document.location.href = "/board";
+    });
+</script>
+        
+</body>
+</html>

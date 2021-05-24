@@ -13,15 +13,17 @@ public class Usr {
     private int id;
     @Column
     private String login;
-
     @Column
     private String password;
+    @Column
+    private String role;
 
 
-    public Usr(int user_id, String login, String password) {
+    public Usr(int user_id, String login, String password, String role) {
         this.id = user_id;
         this.login = login;
         this.password = password;
+        this.role = role;
     }
 
     public int getId() {
@@ -35,4 +37,6 @@ public class Usr {
     public String getPassword() {
         return password;
     }
+
+    public String getRole() {return role;}
 }

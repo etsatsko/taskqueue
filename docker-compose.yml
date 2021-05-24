@@ -1,0 +1,21 @@
+version: '3.1'
+
+services:
+  db:
+    image: mysql:latest
+    restart: always
+    container_name: 'some-mysql'
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: taskqueue
+    ports:
+      - 3308:3306
+  app:
+    image:
+      etsatsko/simplewebapplication:0.0.1-SNAPSHOT
+    ports:
+      - "8080:8080"
+    expose:
+      - "8080"
+    links:
+      - db

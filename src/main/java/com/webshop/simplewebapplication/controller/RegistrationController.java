@@ -1,6 +1,8 @@
 package com.webshop.simplewebapplication.controller;
 
+import com.webshop.simplewebapplication.Service.BoardService;
 import com.webshop.simplewebapplication.Service.UserService;
+import com.webshop.simplewebapplication.model.Board;
 import com.webshop.simplewebapplication.model.Usr;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,6 +20,8 @@ public class RegistrationController {
 
     @Autowired
     private UserService userService;
+    @Autowired
+    private BoardService boardService;
 
     @GetMapping("/registration")
     public String registration() {
@@ -27,9 +31,18 @@ public class RegistrationController {
     @PostMapping("/registration")
     public ModelAndView add(@RequestParam("login") String login,
                             @RequestParam("password") String password)  {
-        userService.addUser(new Usr(0,login,password));
         logger.info("Создан пользователь");
         ModelAndView modelAndView = new ModelAndView();
+        if (userService.findByLogin(login) == null){
+            Board board = new Board(0,login);
+            boardService.createBoard(board);
+            userService.addUser(new Usr(0,login,password, "USER"));
+            logger.info("Created user with login: " + login);
+            modelAndView.setViewName("login");
+        } else{
+            modelAndView.setViewName("registration");
+            modelAndView.addObject("error", true);
+        }
         modelAndView.setViewName("login");
         return modelAndView;
     }

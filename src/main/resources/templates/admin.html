@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Admin Zone</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
+    <meta name="viewport" content="width=task-width, initial-scale=1"/>
+    <meta charset="UTF-8"/>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" th:inline="javascript"></script>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+
+<header>
+    <h2>Admin Zone</h2>
+</header>
+
+<body>
+<p><a th:href="@{/logout}">Выйти</a></p>
+
+<style>
+    p{
+        margin: 0;
+    }
+    .content{
+        display: flex;
+        align-items: center;
+        flex-direction: row;
+        margin-left: 2%;
+    }
+    .task {
+        border: 2px solid black;
+        width: 300px;
+        display: block;
+        align-content: center;
+        margin-top: 30px;
+        background-color: antiquewhite;
+    }
+</style>
+
+<div class="row content" id="task-list">
+    <div class="col-md-4" th:id="${task.getId()} + task" th:each="task : ${tasks}">
+        <div class="task">
+            <form action="/" method="get">
+                <p th:text="'id:' + ${task.getId()}" style="display: none;"/>
+                <p  th:text="'Наименование задачи: ' + ${task.getName()}"></p>
+                <p  th:text="'Описание задачи: ' + ${task.getDescription()}"></p>
+                <p  th:text="'Приоритет задачи: ' + ${task.getPriority()}"></p>
+                <p  th:text="'Статус задачи: ' + ${task.getStatus()}"></p>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

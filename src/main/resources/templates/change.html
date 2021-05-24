@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+</head>
+<body>
+<p><a th:href="@{/logout}">Выйти</a></p>
+<a href="/" id="ret"><button>Вернуться к доске</button></a>
+    <form action="/change" method="post" enctype="multipart/form-data">
+        <select name="task" id="task" th:required="required">
+            <option th:each="task : ${tasks}"
+                    th:value="${task.getId()}"
+                    th:text="${task.getName()}">
+            </option>
+        </select>
+        <input type="text" placeholder="Новое название" name="name" id="name" th:required="required"/>
+        <input type="text" placeholder="Новое описание" name="description" id="description" th:required="required"/>
+        <input type="number" placeholder="Новый приоритет" name="priority" id="priority" th:required="required"/>
+        <button type="submit" id="submit">Изменить</button>
+    </form>
+</body>
+</html>
